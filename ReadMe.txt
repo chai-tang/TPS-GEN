@@ -1,5 +1,3 @@
-# TPS-GEN
-
 ==================================
 CISC455 Final Project - Genetic Algorithm for Target Prioritization Strategies
 Joshua Chai-Tang 20119074
@@ -68,6 +66,5 @@ For mutation, I opted to use a much more aggressive method than in assignment 2.
 7. Conclusions
 ----------------------------------
 Conclusions are discussed in the main project report.
-
 
 
