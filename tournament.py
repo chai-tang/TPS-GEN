@@ -61,18 +61,18 @@ def select_parents(population,tourney_size,num_parents,do_tournament_battles,par
         # if do_tournament_battles is true, simulate battles between the parents
         if do_tournament_battles:
             # reset curr_fitness and battle_count attributes
-            for s0 in contestants:
-                s0.curr_fitness = 0
-                s0.battle_count = 0
+            for i in contestants:
+                population[i].curr_fitness = 0
+                population[i].battle_count = 0
             # simulate the battles
-            for s0 in contestants:
-                for s1 in contestants:
+            for i in contestants:
+                for j in contestants:
                     # strategies shouldn't battle themselves
-                    if s0 != s1:
-                        evaluation.simulate_battles(s0,s1,party,party,battles_per_test,win_score,lose_score,survivor_bonus,kill_bonus)
+                    if i != j:
+                        evaluation.simulate_battles(population[i],population[j],party,party,battles_per_test,win_score,lose_score,survivor_bonus,kill_bonus)
             # determine the fitness scores
-            for s0 in contestants:
-                s0.fitness = s0.curr_fitness / s0.battle_count
+            for i in contestants:
+                population[i].fitness = population[i].curr_fitness / population[i].battle_count
 
         # select the contestant with the highest fitness value as winner
         best_fit = -99999999999999

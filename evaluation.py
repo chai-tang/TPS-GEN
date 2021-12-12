@@ -187,10 +187,12 @@ def simulate_battles(indv0,indv1,party_indv0,party_indv1,num_battles,win_score,l
                 if debug: print("Indv0 wins battle",i,"with",survivors,"survivors.")
                 indv0.curr_fitness += win_score + (survivors*survivor_bonus)
                 indv1.curr_fitness += lose_score + ((len(party_indv0)-survivors)*kill_bonus)
+                indv0.lifetime_win_count += 1
             elif winner == 1:
                 if debug: print("Indv1 wins battle",i,"with",survivors,"survivors.")
                 indv0.curr_fitness += lose_score + ((len(party_indv1)-survivors)*kill_bonus)
                 indv1.curr_fitness += win_score + (survivors*survivor_bonus)
+                indv1.lifetime_win_count += 1
             else:
                 if debug: print("Battle",i,"is a tie")
                 indv0.curr_fitness += (win_score+lose_score)/2
@@ -203,10 +205,12 @@ def simulate_battles(indv0,indv1,party_indv0,party_indv1,num_battles,win_score,l
                 if debug: print("Indv1 wins battle",i,"with",survivors,"survivors.")
                 indv1.curr_fitness += win_score + (survivors*survivor_bonus)
                 indv0.curr_fitness += lose_score + ((len(party_indv1)-survivors)*kill_bonus)
+                indv1.lifetime_win_count += 1
             elif winner == 1:
                 if debug: print("Indv0 wins battle",i,"with",survivors,"survivors.")
                 indv1.curr_fitness += lose_score + ((len(party_indv0)-survivors)*kill_bonus)
                 indv0.curr_fitness += win_score + (survivors*survivor_bonus)
+                indv0.lifetime_win_count += 1
             else:
                 if debug: print("Battle",i,"is a tie")
                 indv1.curr_fitness += (win_score+lose_score)/2
@@ -215,6 +219,8 @@ def simulate_battles(indv0,indv1,party_indv0,party_indv1,num_battles,win_score,l
         # increment the battle counter for both individuals
         indv0.battle_count += 1
         indv1.battle_count += 1
+        indv0.lifetime_battle_count += 1
+        indv1.lifetime_battle_count += 1
 
     return
 

@@ -12,7 +12,6 @@ Defines the Unit object, which represents a single unit within a party.
 A party will consist of a list of units.
 
 Attributes:
--id     : int : The identifying number of this unit, usually corresponds to its position in the party
 -attack : int : The amount of damage this unit deals to an enemy unit's health when attacking 
 -health : int : The number of 'Hit Points' this unit has, which determines how much damage it can take before 'dying'
 
@@ -20,8 +19,7 @@ Methods
 __repr__ & __str__ : Simple override methods to allow this unit's values to be printed to console in a readable manner. Only used for debugging, serves no actual purpose to the algorithm.
 """
 class Unit:
-    def __init__(self,id,attack,health):
-        self.id = id
+    def __init__(self,attack,health):
         self.attack = attack
         self.health = health
     def __repr__(self):
@@ -53,12 +51,18 @@ class Strategy:
         self.strat = strat
         self.curr_fitness = 0
         self.battle_count = 0
+        self.lifetime_battle_count = 0
+        self.lifetime_win_count = 0
         self.fitness = 0
     def __repr__(self):
         return str(self)
     def __str__(self):
-        output = ">Strategy of size "+str(self.size)+" from Generation #"+str(self.age)+":\n"
+        output = ">Strategy from Generation #"+str(self.age)+":"
         for unit in range(len(self.strat)):
-            output += ">Unit"+str(unit)+": "+str(self.strat[unit])+"\n"
-        output += ">Most Recent Fitness Value: "+str(self.fitness)
+            output += "\n>Unit"+str(unit)+": "+str(self.strat[unit])
+        output += "\n>Most Recent Fitness Score: "+str(self.fitness)
+        output += "\n>Lifetime Battle Count: "+str(self.lifetime_battle_count)
+        output += "\n>Lifetime Win Count: "+str(self.lifetime_win_count)
+        if self.lifetime_battle_count > 0: 
+            output += "\n>Overall Winrate: "+str((self.lifetime_win_count/self.lifetime_battle_count)*100)+"%"
         return output
